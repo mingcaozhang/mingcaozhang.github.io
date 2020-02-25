@@ -40,7 +40,7 @@
   .icons {
     position: fixed;
     right: 10px;
-    top: 20px;
+    align-items: center;
   }
   
   .navbutton {
