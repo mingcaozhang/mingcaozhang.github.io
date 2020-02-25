@@ -39,8 +39,8 @@
 
   .icons {
     position: fixed;
-    right: 10px;
-    align-items: center;
+    top: 2vh;
+    right: 2vh;
   }
   
   .navbutton {
