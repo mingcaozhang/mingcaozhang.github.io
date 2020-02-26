@@ -1,21 +1,21 @@
   body {
-      height: 125vh;
-      background-image: url('../images/iceland.jpg');
-      background-size: cover;
+      background-color: #333333;
       font-family: Helvetica;
       overscroll-behavior-y: none;
       overscroll-behavior-x: none;
       margin-top: 8%;
       padding: 4%;
   }
-
+  
   main {
       color: white;
-      text-shadow: 1px 0 0 #000, 0 -1px 0 #000, 0 1px 0 #000, -1px 0 0 #000;
+      text-shadow: 2px 0 0 #000, 0 -2px 0 #000, 0 2px 0 #000, -2px 0 0 #000;
+      font-size: 30px;
+      text-align: center;
   }
-
+  
   header {
-      background-color: #1f2120;
+      background-color: #0d0d0d;
       position: fixed;
       top: 0;
       left: 0;
@@ -24,40 +24,41 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
+      z-index: 99;
   }
-
+  
   header * {
-    display: inline;
+      display: inline;
   }
-
+  
   header img {
-      height: 40px; 
+      height: 40px;
       width: auto;
       border-right: 10px;
       margin-right: 15px;
   }
-
+  
   .icons {
-    position: fixed;
-    top: 2vh;
-    right: 2vh;
+      position: fixed;
+      top: 2vh;
+      right: 2vh;
   }
   
   .navbutton {
-      background-color: #1f2120;
+      background-color: #0d0d0d;
       border: none;
       color: white;
       text-align: center;
       font-size: 30px;
       transition: all 0.5s;
   }
-
+  
   .navbutton span {
       display: inline-block;
       position: relative;
       transition: 0.5s;
   }
-
+  
   .navbutton span:after {
       content: '\00bb';
       position: absolute;
@@ -66,12 +67,27 @@
       right: -20px;
       transition: 0.5s;
   }
-
+  
   .navbutton:hover span {
       padding-right: 25px;
   }
-
+  
   .navbutton:hover span:after {
       opacity: 1;
       right: 0;
+  }
+  
+  .circular {
+      display: inline-block;
+      position: relative;
+      width: 400px;
+      height: 400px;
+      overflow: hidden;
+      border-radius: 50%;
+  }
+  
+  .circular img {
+      width: auto;
+      height: 100%;
+      margin-left: -125px;
   }
