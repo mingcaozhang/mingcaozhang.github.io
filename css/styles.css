@@ -91,3 +91,16 @@
       height: 100%;
       margin-left: -125px;
   }
+  
+  .enigmakey {
+      background-color: #0d0d0d;
+      border: 5px;
+      border-color: lightgray;
+      color: white;
+      padding: 20px;
+      font-size: 16px;
+      margin: 6px 4px;
+      height: 40px;
+      width: 40px;
+      border-radius: 50%;
+  }
