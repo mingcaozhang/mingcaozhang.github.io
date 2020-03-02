@@ -1,28 +1,83 @@
-const Fixed_Sequence =
-    Array('A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N',
-        'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z')
-const Rotor_I_Sequence =
-    Array('E', 'K', 'M', 'F', 'L', 'G', 'D', 'Q', 'V', 'Z', 'N', 'T', 'O', 'W',
-        'Y', 'H', 'X', 'U', 'S', 'P', 'A', 'I', 'B', 'R', 'C', 'J')
-const Rotor_II_Sequence =
-    Array('A', 'J', 'D', 'K', 'S', 'I', 'R', 'U', 'X', 'B', 'L', 'H', 'W', 'T',
-        'M', 'C', 'Q', 'G', 'Z', 'N', 'P', 'Y', 'F', 'V', 'O', 'E')
-const Rotor_III_Sequence =
-    Array('B', 'D', 'F', 'H', 'J', 'L', 'C', 'P', 'R', 'T', 'X', 'V', 'Z', 'N',
-        'Y', 'E', 'I', 'W', 'G', 'A', 'K', 'M', 'U', 'S', 'Q', 'O')
-const B_Reflector_Sequence =
-    Array('Y', 'R', 'U', 'H', 'Q', 'S', 'L', 'D', 'P', 'X', 'N', 'G', 'O', 'K',
-        'M', 'I', 'E', 'B', 'F', 'Z', 'C', 'W', 'V', 'J', 'A', 'T')
+$(document).ready(function() {
+    $("#encryptSubmit").click(function() {
+        var text = $("#text").val();
+        submitAjax(text);
+    });
+});
 
-var EnigmaMachine = {
-    encrypt: function(input) {
-        console.log(`Encrypting ${input}`);
+function increment() {
+    var rightRotor = document.getElementById('right');
+    var right = rightRotor.textContent;
+    var centerRotor = document.getElementById('center');
+    var center = centerRotor.textContent;
+    var leftRotor = document.getElementById('left');
+    var left = leftRotor.textContent;
+    if (right === 'Z') {
+        rightRotor.textContent = 'A';
+        if (center === 'Z') {
+            centerRotor.textContent = 'A';
+            if (left === 'Z') {
+                leftRotor.textContent = 'A';
+            } else {
+                leftRotor.textContent = nextChar(left);
+            }
+        } else {
+            centerRotor.textContent = nextChar(center);
+        }
+    } else {
+        rightRotor.textContent = nextChar(right);
     }
-};
-
-function encrypt(input) {
-    if (input === undefined) {
-        console.log(input);
-    }
-    EnigmaMachine.encrypt(input)
 }
+
+function nextChar(c) {
+    return String.fromCharCode(c.charCodeAt(0) + 1);
+}
+
+function submitAjax(text) {
+    var text = text;
+    var right = document.getElementById('right').textContent;
+    var center = document.getElementById('center').textContent;
+    var left = document.getElementById('left').textContent;
+    var obj = {};
+    obj.text = text;
+    obj.right = right;
+    obj.center = center;
+    obj.left = left;
+    var json = JSON.stringify(obj);
+    console.log(json);
+
+    var resp = $.ajax({
+        type: "POST",
+        dataType: "text",
+        contentType: "application/json",
+        url: "http://192.168.86.68:8080/encrypt",
+        data: json,
+        success: function(data) {
+            var output = document.querySelector('div#output');
+            output.textContent = data;
+        },
+        failure: function(data) { console.log("Failure."); },
+    });
+}
+
+function getKey(e) {
+    var key = document.body.querySelector('div [data-char="' + e.key.toUpperCase() + '"]')
+    console.log(key);
+    return key;
+}
+
+document.addEventListener('keydown', event => {
+    var key = getKey(event);
+    if (key != null) {
+        key.setAttribute('data-pressed', 'on');
+        increment();
+        submitAjax(event.key.toUpperCase());
+    }
+});
+
+document.addEventListener('keyup', function(e) {
+    var key = getKey(e);
+    if (key != null) {
+        key && key.removeAttribute('data-pressed');
+    }
+});

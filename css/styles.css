@@ -128,6 +128,31 @@ main p {
     height: 100%;
 }
 
+.enigmaContainer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+#input {
+    flex: auto;
+}
+
+#output {
+    flex: auto;
+    background-color: white;
+    text-shadow: 0px 0px black;
+    color: black;
+    padding: 20px;
+    border-radius: 25px;
+}
+
+.rotors {
+    display: flex;
+    flex-direction: row-reverse;
+}
+
 .enigmakey {
     background-color: #0d0d0d;
     border: 5px;
@@ -153,4 +178,53 @@ main p {
     header {
         justify-content: center;
     }
+}
+
+.keyboard {
+    display: flex;
+    flex-direction: column;
+    font-size: 14px;
+}
+
+.keyboard_row {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    height: 3em;
+    margin: 0.2em;
+}
+
+.keyboard_row .letter {
+    position: relative;
+    background: #333;
+    text-align: center;
+    color: #eee;
+    float: left;
+    border-radius: 0.3em;
+    margin: 0.2em;
+    padding: 0.2em;
+    width: 3.3em;
+    height: 100%;
+    box-sizing: border-box;
+    cursor: pointer;
+    -webkit-user-select: none;
+    border: 1px solid #444;
+    box-shadow: 0 0.2em 0 0.05em #222;
+    border-bottom-color: #555;
+}
+
+.keyboard_row .letter[data-pressed] {
+    background: #2a2a2a;
+    color: #aaa;
+    position: relative;
+    top: 0.2em;
+    box-shadow: 0 0 0 0.05em black;
+}
+
+.letter {
+    line-height: 2.8em;
+}
+
+.keyboard .keyboard_row {
+    text-align: center;
 }
