@@ -50,7 +50,7 @@ function submitAjax(text) {
         type: "POST",
         dataType: "text",
         contentType: "application/json",
-        url: "http://192.168.86.68:8080/encrypt",
+        url: "https://192.168.86.68:8080/encrypt",
         data: json,
         success: function(data) {
             var output = document.querySelector('div#output');
